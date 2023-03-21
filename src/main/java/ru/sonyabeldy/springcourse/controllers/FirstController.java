@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-//@RequestMapping("/first")
+@RequestMapping("/first")
 public class FirstController {
 
     @GetMapping("/hello")
