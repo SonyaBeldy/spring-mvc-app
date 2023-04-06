@@ -67,6 +67,17 @@ public class PersonDAO {
     public void save(Person person) {
 //        person.setId(++PEOPLE_COUNT);
 //        people.add(person);
+
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "INSERT INTO Person VALUES(" + 5 + ",'" + person.getName() +
+                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
+
+            // INSERT INTO Person VALUES(1, 'Tom', 18, 'as@sa.com')
+            statement.executeUpdate(SQL);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void update(int id, Person updatedPerson) {
