@@ -23,7 +23,7 @@ public class PersonDAO {
 //    private static final String PASSWORD = "1111";
 //
 //    private static Connection connection;
-
+//
 //    static {
 //        try {
 //            Class.forName("com.mysql.jdbc.Driver");
