@@ -84,6 +84,13 @@
       <version>${spring.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.6.0</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <finalName>spring-mvc-app1</finalName>
