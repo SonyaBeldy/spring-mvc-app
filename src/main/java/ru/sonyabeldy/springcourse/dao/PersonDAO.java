@@ -14,104 +14,26 @@ import java.util.Optional;
 
 @Component
 public class PersonDAO {
-    private final JdbcTemplate jdbcTemplate;
-    @Autowired
-    public PersonDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-//    private static final String URL = "jdbc:mysql://localhost:3306/first_db";
-//    private static final String USERNAME = "sonya";
-//    private static final String PASSWORD = "1111";
-//
-//    private static Connection connection;
-//
-//    static {
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     public List<Person> index() {
-//        return jdbcTemplate.query("SELECT * FROM Person", new PersonMapper());
-        return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class)); //вместо маппера
+        return null;
     }
 
     public Optional<Person> show(String email) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE email=?",
-                new Object[] {email},
-                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
+        return null;
     }
 
     public Person show(int id) {
-        //////////////////////////запрос в базу                         аргументы к запросу (=?), то, что будет преобразовывать результат запроса в экземпляр классса
-        return jdbcTemplate.query("SELECT * FROM Person WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny().orElse(null);
+        return null;
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO Person (name, age, email, address) VALUES(?, ?, ?, ?)", person.getName(),
-                person.getAge(), person.getEmail(), person.getAddress());
     }
 
     public void update(int id, Person updatedPerson) {
-        jdbcTemplate.update("UPDATE Person SET name=?, age=?, email=?, address=? WHERE id=?", updatedPerson.getName(),
-                updatedPerson.getAge(), updatedPerson.getEmail(), updatedPerson.getAddress(), id);
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
-    }
-
-    ///////////////////
-    //Тестируем производительность пакетной вставки
-    ///////////////////
-
-    public void testMultipleUpdate(){
-        List<Person> people = create1000People();
-
-        long before = System.currentTimeMillis();
-
-        for (Person person: people) {
-            jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
-                    person.getName(), person.getAge(), person.getEmail());
-        }
-        long after = System.currentTimeMillis();
-        System.out.println("Time: "  + (after - before));
-    }
-
-    public void testBatchUpdate() {
-        List<Person> people = create1000People();
-        long before = System.currentTimeMillis();
-
-        jdbcTemplate.batchUpdate("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)",
-                new BatchPreparedStatementSetter() {
-                    @Override
-                    public void setValues(PreparedStatement ps, int i) throws SQLException {
-                        ps.setString(1, people.get(i).getName());
-                        ps.setInt(2, people.get(i).getAge());
-                        ps.setString(3, people.get(i).getEmail());
-                    }
-
-                    @Override
-                    public int getBatchSize() {
-                        return people.size();
-                    }
-                });
-
-
-        long after = System.currentTimeMillis();
-        System.out.println("Time: " + (after - before));
-
-
     }
 
     private List<Person> create1000People() {
