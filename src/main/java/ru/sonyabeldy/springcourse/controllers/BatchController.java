@@ -3,7 +3,7 @@ package ru.sonyabeldy.springcourse.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sonyabeldy.springcourse.dao.PersonDAO;
+//import ru.sonyabeldy.springcourse.dao.PersonDAO;
 
 @Controller
 @RequestMapping("/test-batch-update")

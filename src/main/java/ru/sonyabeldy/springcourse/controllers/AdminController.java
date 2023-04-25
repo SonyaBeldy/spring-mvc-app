@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.sonyabeldy.springcourse.dao.PersonDAO;
 import ru.sonyabeldy.springcourse.models.Person;
 
-//@Controller
-//@RequestMapping("/admin")
+
 public class AdminController {
 
 //    private final PersonDAO personDAO;
