@@ -42,6 +42,13 @@ public class Person {
         this.address = address;
     }
 
+    public void update(Person updatedPerson) {
+        this.name = updatedPerson.getName();
+        this.age = updatedPerson.getAge();
+        this.email = updatedPerson.getEmail();
+        this.address = updatedPerson.getAddress();
+    }
+
     public int getId() {
         return id;
     }
