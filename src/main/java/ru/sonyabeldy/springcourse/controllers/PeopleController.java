@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.sonyabeldy.springcourse.dao.PersonDAO;
 import ru.sonyabeldy.springcourse.models.Person;
+import ru.sonyabeldy.springcourse.services.ItemService;
 import ru.sonyabeldy.springcourse.services.PeopleService;
 import ru.sonyabeldy.springcourse.util.PersonValidator;
 
@@ -18,18 +18,27 @@ public class PeopleController {
 
 //    private final PersonDAO personDAO;
     private final PeopleService peopleService;
+    private final ItemService itemService;
     private final PersonValidator personValidator;
 
+
     @Autowired
-    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
+    public PeopleController(PeopleService peopleService, PersonValidator personValidator, ItemService itemService) {
         this.personValidator = personValidator;
         this.peopleService = peopleService;
+        this.itemService = itemService;
     }
 
     @GetMapping()
     public String index(Model model) {
         //Получим всех людей из DAO и передадим на отображение в представление
         model.addAttribute("people", peopleService.findAll());
+
+        itemService.findByItemName("Airpods");
+        itemService.findByOwner(peopleService.findAll().get(0));
+
+        peopleService.test();
+
         return "people/index";
     }
 

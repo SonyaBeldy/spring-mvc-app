@@ -3,6 +3,7 @@ package ru.sonyabeldy.springcourse.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -31,6 +32,9 @@ public class Person {
     @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Your address should be in this format: Country, City, Postal Code (6 digits)")
     private String address;
 
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
     public Person() {
 
     }
@@ -87,5 +91,13 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }
