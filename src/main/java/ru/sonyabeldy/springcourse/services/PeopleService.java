@@ -3,9 +3,11 @@ package ru.sonyabeldy.springcourse.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.sonyabeldy.springcourse.models.Mood;
 import ru.sonyabeldy.springcourse.models.Person;
 import ru.sonyabeldy.springcourse.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +34,9 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
+        person.setMood(Mood.CALM); //4
+        person.setCreatedAt(new Date());
+
         peopleRepository.save(person);
     }
 
